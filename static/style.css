@@ -7,7 +7,7 @@
 
 icon {
     font-family: sfi;
-    margin-bottom: -2%;
+    transform: translateY(2%);
 }
 
 a{
@@ -134,11 +134,31 @@ a{
     margin-top: 50px;
     margin-bottom: 8vh;
     box-shadow: 0 0 20px #fff;
+    gap: 10px;
 
     &:hover {
         transform: none;
-        background-color: #2673e7;
+        background-color: #79e9ff;
+        background: radial-gradient(150px at var(--pos),#90f0ff 10px,#00000000),#57cdff;
+        color: #000;
     }
+
+    &:active{
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
+body.squ{
+    #mainbtn{
+        corner-shape: squircle;
+        border-radius: 40px;
+    }
+    #achievements>.grid>.item{
+        corner-shape: squircle;
+        border-radius: 50px;
+    }
+
 }
 
 #achievements {
@@ -155,7 +175,7 @@ a{
 
 #achievements>.grid>.item {
     background-color: #fcfcfcc0;
-    box-shadow: 0 5px 20px #00000030;
+    box-shadow: 0 5px 23px #00000027;
     border-radius: 20px;
     display: flex;
     padding: 0;
@@ -165,8 +185,8 @@ a{
     transition: 100ms;
 
     &:hover{
-        background-color: #fff;
-        box-shadow: 0 6px 22px #00000029;
+        background-color: #ffffffe0;
+        box-shadow: 0 6px 25px #00000020;
         >img{
             transform: scale(1.1);
         }
@@ -191,7 +211,7 @@ a{
 #achievements>.grid>.item>.body {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px 20px;
     padding-left: 0;
     flex-grow: 1;
     height: max-content;
@@ -314,13 +334,11 @@ a{
     gap: 10px;
 
     >div {
-        /* width: 80px; */
         height: max-content;
         >img{
             width: 70px;
             height: 70px;
         }
-        /* height: 80px; */
     }
 }
 
@@ -334,13 +352,13 @@ a{
 #footer>div {
     display: flex;
     gap: 20px;
+    margin: 150px 0 50px 0;
 }
 
 #footer>div>a{
     font-size: 18px;
     border-bottom: 2px solid transparent;
     transition: 100ms;
-    margin: 50px 0;
     text-shadow: 0 0 8px #fff;
 
     &:hover {
