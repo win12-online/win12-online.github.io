@@ -44,8 +44,8 @@ hr {
 }
 
 [type=button], [type=reset], [type=submit], button {
-    -webkit-appearance: button;
-    appearance: button;
+    -webkit-appearance: none;
+    appearance: none;
 }
 button, select {
     text-transform: none;
@@ -75,13 +75,7 @@ button {
     align-items: flex-start;
     cursor: default;
     box-sizing: border-box;
-    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
-    margin: 0em;
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: buttonborder;
-    border-image: initial;
+    outline: none;
 }
 
 a:-webkit-any-link {
