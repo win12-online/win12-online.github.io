@@ -231,8 +231,9 @@
       </a>
     </div>
   </div>
+  <script src="test/cursor.js"></script>
+  <script src="test/module.js"></script>
   <script>
-    if(CSS.supports('corner-shape','squircle'))document.body.classList+='squ';
     const t=document.getElementById('mainbtn');
     t.addEventListener('mousemove',e=>{
       t.style.setProperty('--pos',`${e.clientX-t.offsetLeft}px ${e.clientY-t.offsetTop}px`);
@@ -243,6 +244,18 @@
       document.body.style.opacity=0;
       document.body.style.backgroundColor='#000';
     }
+
+    $cursor.query('#achievements .item,#bili>.card>.main>.img>img').addEffect('tiltRepel',{maxTilt:12,perspective:800});
+    $cursor.query('#view>img').addEffect('tiltRepel',{maxTilt:5,perspective:1000});
+
+    const bb=$cursor.query('.bubble').addEffect('magneticAttract',{maxOffset: 50});
+    document.body.addEventListener('scroll',(e)=>{
+      if(document.body.scrollTop>document.body.clientHeight/2){
+        bb.pause();
+      }else{
+        bb.resume();
+      }
+    });
   </script>
 </body>
 

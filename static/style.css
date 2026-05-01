@@ -33,6 +33,11 @@ a {
     gap: 5px;
     color: #000;
     text-decoration: none;
+    transition: 80ms;
+}
+
+a:active{
+    opacity: 0.5;
 }
 
 img {
@@ -160,6 +165,7 @@ body>*{
     text-shadow: 0 0 15px #fff;
     text-align: center;
     cursor: default;
+    font-family:;
 }
 
 #intro {
@@ -187,13 +193,6 @@ body>*{
     padding: 0 50px 10px 50px;
     z-index: 0;
     display: block;
-        /* position: sticky;
-        top: 0;
-        left: 0; */
-        
-    /* animation-name: intro;
-    animation-fill-mode: forwards;
-    animation-timeline: view(0 100%); */
 
     view-timeline: --view block 0 100%;
     /* animation-range: 80vh 80vh; */
@@ -230,6 +229,7 @@ body>*{
     height: 100%;
     margin: 0;
     padding: 0;
+    transition: transform 100ms;
 }
 
 #mainbtn {
@@ -248,7 +248,7 @@ body>*{
     &:hover {
         transform: none;
         background-color: #79e9ff;
-        background: radial-gradient(150px at var(--pos), #90f0ff 10px, #00000000), #57cdff;
+        background: radial-gradient(150px at var(--pos), #9cf2ff 10px, #00000000), #65d8ff;
         color: #000;
     }
 
@@ -258,7 +258,7 @@ body>*{
     }
 }
 
-body.squ {
+@supports(corner-shape: squircle) {
     #mainbtn {
         corner-shape: squircle;
         border-radius: 40px;
@@ -266,7 +266,7 @@ body.squ {
 
     #achievements>.grid>.item {
         corner-shape: squircle;
-        border-radius: 50px;
+        border-radius: 50px !important;
     }
 
     #view {
@@ -278,10 +278,17 @@ body.squ {
             border-radius: 35px !important;
         }
     }
+
+    #view>.cursor-glow-edge{
+        
+        corner-shape: squircle;
+        border-radius: 52px !important;
+    }
 }
 
 #achievements {
     padding: 100px 0;
+    margin-top: 50px;
     /* scroll-snap-align: start; */
 }
 
@@ -364,10 +371,6 @@ body.squ {
     #achievements>.grid>.item:nth-child(3) {
         grid-column: 1 / -1;
     }
-
-    /* #head>#view{
-        width: 70%;
-    } */
 }
 
 @media (min-width: 1300px) {
@@ -389,7 +392,7 @@ body.squ {
 
     >.title {
         font-size: 40px;
-        /* font-weight: bold; */
+        font-weight: bold;
         margin-bottom: 50px;
         text-align: center;
         cursor: default;
@@ -587,7 +590,7 @@ body.squ {
 
 @keyframes fromleft {
     from{
-        transform: translateX(-30px);
+        transform: translateX(-30px) rotate(10deg);
         opacity: 0;
     }
     to{
@@ -598,7 +601,7 @@ body.squ {
 
 @keyframes fromright {
     from{
-        transform: translateX(30px);
+        transform: translateX(30px) scale(0.9) rotate(-10deg);
         opacity: 0;
     }
     to{
@@ -631,10 +634,9 @@ body.squ {
     >.img {
         width: 100%;
 
-        border-radius: 15px;
-        overflow: hidden;
+        /* border-radius: 15px; */
+        /* overflow: hidden; */
         position: relative;
-        border: 2px solid #99999950;
         flex-shrink: 0;
         display: flex;
         user-select: none;
@@ -642,6 +644,9 @@ body.squ {
         >img {
             width: 100%;
             height: 100%;
+            transition: transform 100ms;
+            border-radius: 15px;
+        border: 2px solid #99999950;
         }
 
         >.playico {

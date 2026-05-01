@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光标特效展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .badge {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .badge-global {
+            background: #667eea33;
+            color: #667eea;
+            border: 1px solid #667eea55;
+        }
+
+        .badge-hover {
+            background: #f093fb33;
+            color: #f093fb;
+            border: 1px solid #f093fb55;
+        }
+
+        /* ===== 卡片网格 ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== 演示卡片 ===== */
+        .demo-card {
+            background: #141428;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #252540;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* transition: box-shadow 0.3s; */
+        }
+
+        .demo-card:hover {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .demo-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #ccc;
+            position: relative;
+            z-index: 2;
+        }
+
+        .demo-card .desc {
+            font-size: 0.85rem;
+            color: #777;
+            position: relative;
+            z-index: 2;
+            line-height: 1.5;
+        }
+
+        .demo-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* glowEdge 卡片的基础样式 */
+        .card-glow-edge {
+            background: #1a1a30;
+            border: 2px solid transparent;
+        }
+
+        /* dynamicBgGlow 卡片使用CSS变量 */
+        .card-bg-glow {
+            background: var(--cursor-glow, #141428);
+            background-size: cover;
+            /* transition: background 0.05s ease-out; */
+        }
+
+        /* hoverGlow 卡片 */
+        .card-hover-glow {
+            background: var(--hover-glow, #141428);
+            /* transition: background 0.08s ease-out; */
+        }
+
+        /* 磁性吸引卡片 */
+        .card-magnetic {
+            /* transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94); */
+            will-change: transform;
+        }
+
+        /* 立体偏转卡片 */
+        .card-tilt {
+            /* transition: transform 0.15s ease-out; */
+            will-change: transform;
+            transform-style: preserve-3d;
+        }
+
+        .card-tilt-inner {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* 粒子背景区域 */
+        .showcase-area {
+            background: #141428;
+            border-radius: 16px;
+            border: 1px solid #252540;
+            padding: 40px;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 代码参数展示 */
+        .params {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: #555;
+            background: #0a0a15;
+            padding: 8px 14px;
+            border-radius: 8px;
+            position: relative;
+            z-index: 2;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+
+        .params span {
+            color: #f093fb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ 光标魔法特效</h1>
+        <p class="subtitle">移动鼠标探索各种交互效果 · 悬停卡片体验不同反馈</p>
+
+        <!-- ========== 通用效果 (Global) ========== -->
+        <div class="section-title">
+            <span class="badge badge-global">Global</span> 通用效果 · 跟随鼠标全局响应
+        </div>
+
+        <div class="cards-grid">
+            <!-- 1. 发光边缘 -->
+            <div class="demo-card card-glow-edge cursor-glow-edge-demo" id="glowEdgeDemo">
+                <div class="icon">💫</div>
+                <h3>发光边缘</h3>
+                <p class="desc">使用 conic-gradient 伪元素<br>光晕旋转始终朝向鼠标</p>
+                <div class="params">
+                    参数: <span>color</span> <span>width</span> <span>blur</span>
+                </div>
+            </div>
+
+            <!-- 2. 磁性吸引 -->
+            <div class="demo-card card-magnetic cursor-magnetic-demo" id="magneticDemo">
+                <div class="icon">🧲</div>
+                <h3>磁性吸引</h3>
+                <p class="desc">元素被鼠标牵引偏移<br>k1控制跟随力度 · k2控制稳定性</p>
+                <div class="params">
+                    参数: <span>k1=40</span> <span>k2=100</span> <span>maxOffset=25</span>
+                </div>
+            </div>
+
+            <!-- 3. 动态背景光 -->
+            <div class="demo-card card-bg-glow cursor-bg-glow-demo" id="bgGlowDemo">
+                <div class="icon">🔦</div>
+                <h3>动态背景光</h3>
+                <p class="desc">CSS变量 --cursor-glow<br>radial-gradient 跟随鼠标</p>
+                <div class="params">
+                    变量: <span>--cursor-glow</span> 📍
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== 悬停效果 (Hover) ========== -->
+        <div class="section-title">
+            <span class="badge badge-hover">Hover</span> 悬停效果 · 鼠标进入元素时激活
+        </div>
+
+        <div class="cards-grid">
+            <!-- 4. 悬停光源 -->
+            <div class="demo-card card-hover-glow cursor-hover-glow-demo" id="hoverGlowDemo">
+                <div class="icon">💡</div>
+                <h3>悬停光源</h3>
+                <p class="desc">鼠标进入后亮起径向渐变<br>光源中心跟随鼠标移动</p>
+                <div class="params">
+                    变量: <span>--hover-glow</span> · 悬停激活
+                </div>
+            </div>
+
+            <!-- 5. 斥力偏转 -->
+            <div class="demo-card card-tilt cursor-tilt-repel-demo" id="tiltRepelDemo">
+                <div class="icon">🛡️</div>
+                <h3>斥力偏转</h3>
+                <p class="desc">3D立体偏转 · 远离指针<br>像磁铁同极相斥</p>
+                <div class="params">
+                    参数: <span>maxTilt=18</span> <span>perspective=800</span>
+                </div>
+            </div>
+
+            <!-- 6. 引力偏转 -->
+            <div class="demo-card card-tilt cursor-tilt-attract-demo" id="tiltAttractDemo">
+                <div class="icon">🎯</div>
+                <h3>引力偏转</h3>
+                <p class="desc">3D立体偏转 · 朝向指针<br>像卡片被手指吸引</p>
+                <div class="params">
+                    参数: <span>maxTilt=18</span> <span>perspective=800</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 组合效果展示 -->
+        <div class="section-title">
+            <span class="badge badge-global" style="background:#f093fb33;color:#f093fb;border-color:#f093fb55;">组合</span> 
+            混合效果 · 叠加多个效果创造丰富体验
+        </div>
+
+        <div class="cards-grid">
+            <div class="demo-card card-glow-edge card-bg-glow cursor-glow-edge-demo cursor-bg-glow-demo" id="combo1">
+                <div class="icon">🌟</div>
+                <h3>发光边缘 + 动态背景</h3>
+                <p class="desc">两个Global效果叠加<br>边缘光晕 + 内部光源</p>
+            </div>
+
+            <div class="demo-card card-magnetic card-tilt cursor-magnetic-demo cursor-tilt-repel-demo" id="combo2">
+                <div class="icon">🌀</div>
+                <h3>磁吸 + 斥力偏转</h3>
+                <p class="desc">Global + Hover 混合<br>悬停时多维交互</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入依赖 -->
+    <script src="cursor.js"></script>
+    <script src="module.js"></script>
+
+    <script>
+        // 等待 DOM 和脚本加载完成
+        window.addEventListener('DOMContentLoaded', () => {
+            // 确保 $cursor 可用
+            if (typeof $cursor === 'undefined') {
+                console.error('❌ $cursor 未加载，请检查 cursor.js 是否正确引入');
+                return;
+            }
+
+            // ==================== 注册通用效果 ====================
+
+            // 1. 发光边缘
+            // $cursor.query('.cursor-glow-edge-demo').addEffect('glowEdge', {
+            //     color: 'rgba(100, 180, 255, 0.7)',
+            //     width: '3px',
+            //     blur: '6px'
+            // });
+
+            // // 2. 磁性吸引
+            // $cursor.query('.cursor-magnetic-demo').addEffect('magneticAttract', {
+            //     k1: 40,
+            //     k2: 100,
+            //     maxOffset: 25
+            // });
+
+            // // 3. 动态背景光
+            // $cursor.query('.cursor-bg-glow-demo').addEffect('dynamicBgGlow', {
+            //     varName: '--cursor-glow',
+            //     glowColor: 'rgba(120, 160, 255, 0.2)',
+            //     bgColor: '#141428',
+            //     size: 250,
+            //     falloff: 0.65
+            // });
+
+            // // ==================== 注册悬停效果 ====================
+
+            // // 4. 悬停光源
+            // $cursor.query('.cursor-hover-glow-demo').addEffect('hoverGlow', {
+            //     varName: '--hover-glow',
+            //     glowColor: 'rgba(255, 220, 150, 0.3)',
+            //     bgColor: '#141428',
+            //     size: 180
+            // });
+
+            // 5. 斥力偏转
+            $cursor.query('.cursor-tilt-repel-demo').addEffect('tiltRepel', {
+                maxTilt: 18,
+                perspective: 800
+            });
+
+            // 6. 引力偏转
+            $cursor.query('.cursor-tilt-attract-demo').addEffect('tiltRepel', {
+                maxTilt: -18,
+                perspective: 800
+            });
+
+            console.log('✅ 所有光标特效已注册完成！移动鼠标体验效果吧~');
+        });
+    </script>
+</body>
+</html>

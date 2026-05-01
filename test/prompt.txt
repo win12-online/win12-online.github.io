@@ -1,0 +1,88 @@
+编写一个js,css鼠标指针效果模块，语法体验类似jq。请先实现：选择元素（query选择），注册鼠标指针效果。
+细节：元素的效果分两类，一类是通用效果，要在document上监听mousemove；一类是悬停效果，要在元素上监听mousemove,mouseleave,mouseenter(可选)。当然，两者作用对象都是元素。
+注册后在每次事件遍历注册列表，进行处理。并相应地对元素、对某单一效果，对所有内容添加destroy()函数。为了优化性能，当元素不可见或在屏幕外时，通用效果应当停止。为适应特使情况，对元素添加pause与resume函数（针对通用事件）。
+为了便于后续添加，请做好模块化设计、接口传参等，方便后续加入具体的效果处理函数。
+
+
+------------------------------
+
+
+用js实现下述效果。
+
+模块格式描述：
+$cursor.registerEffect('效果名称', {
+    type: 'global',  // 'global' 通用效果 | 'hover' 悬停效果
+    
+    // ===== 通用方法 =====
+    
+    // 初始化，在用户注册此效果时触发以处理参数（可选）
+    // @param {Element} element - 作用的DOM元素，效果的主体对象
+    // @param {Object} options  - 用户传入的参数
+    // @return {Object} data    - 返回的数据对象，会保留并在各方法间传递
+    init(element, options) {
+        return {}; // 初始化状态数据
+        // 不要在这里预存储元素位置，事物是变化的。
+    },
+    
+    // 销毁清理（可选 - 必须实现以清理事件及其它内容）
+    // @param {Object} data    - init返回的数据对象
+    // @param {Element} element
+    destroy(data, element) {
+        // 清理创建的DOM元素、事件等
+    },
+    
+    
+    // ===== 通用效果专用 =====
+    
+    // 鼠标移动时更新（global类型必须实现）
+    // @param {Object} data
+    // @param {number} mouseX    - 鼠标X坐标(clientX)
+    // @param {number} mouseY    - 鼠标Y坐标(clientY)
+    // @param {MouseEvent} event - 原始事件对象
+    // @param {Element} element  - 作用的元素
+    update(data, mouseX, mouseY, event, element) {
+        // 每帧mousemove时被调用（仅元素可见时）
+    },
+    
+    // 可见性变化事件（可选 - 用于优化性能）
+    // @param {Object} data
+    // @param {boolean} visible  - 是否可见
+    // @param {Element} element
+    onVisibilityChange(data, visible, element) {
+        // 元素不可见时，update将自动停止作用，此事件将被触发
+    },
+    
+    
+    // ===== 悬停效果专用 =====
+    
+    // 悬停时鼠标移动（hover类型必须实现）
+    // @param {Object} data
+    // @param {number} x         - 鼠标相对元素的X坐标
+    // @param {number} y         - 鼠标相对元素的Y坐标
+    // @param {MouseEvent} event
+    // @param {Element} element
+    hover(data, x, y, event, element) {
+        // 鼠标在元素上移动时调用
+    },
+    
+    // 鼠标离开（可选）
+    leave(data, event, element) {
+        // 鼠标离开元素时调用，可用于重置状态
+    },
+    
+    // 鼠标进入（可选）
+    enter(data, event, element) {
+        // 鼠标进入元素时调用
+    }
+});
+
+实现下面的内容。
+通用效果：
+1.发光的边缘，旋转光亮朝向鼠标指针（用伪元素实现，使用conic-gradient）。
+2.通过函数模拟鼠标指针对元素进行吸引。（用tansform实现，偏移x=k1*(mousex - x0)/(k1+k2)，y同理，k1k2为参数，分别描述来自元素中心的力和来自鼠标的力）
+3.提供一个实时的css变量，可以用来叠加背景（用radial-gradient），根据鼠标位置偏移光亮部分，并尝试通过渐进于1的函数保证恒处于背景内部。
+
+悬停效果：1.提供一个实时的css变量（radial-gradient），根据鼠标相对位置移动光亮部分。
+2.通过transform的立体变换使卡片类的元素随指针的斥力轻微偏转。
+3.通过立体变换使元素随指针的引力轻微偏转。（可考虑改变描述参数的正负与2合并？）
+给出定义模块的js代码，并简略解释参数。
