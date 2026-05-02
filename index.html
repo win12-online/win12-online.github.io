@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Windows 12 网页版</title>
+  <title data-i18n="page.title">Windows 12 网页版</title>
   <link rel="stylesheet" href="/static/style.css">
   <base target="_blank">
 </head>
@@ -27,10 +27,27 @@
     background: radial-gradient(circle at 20% 20%,#6eddff 10%, rgb(8, 101, 177));
     --d: 18vh;top: 30%; left: 10%;"></div>
   </div>
+  <div id="page-settings" data-value="system">
+    <a class="tgbtn" onclick="$('#page-settings').toggleClass('show')">&#xE973;</a>
+    <span data-i18n="theme.label">主题</span>
+    <div class="switch-track">
+      <div class="switch-handle"></div>
+    </div>
+    <span data-i18n="lang.label">语言</span>
+    <div id="lang-picker">
+      <select id="lang-select" aria-label="Language" style="background-color: var(--surface);border-radius: 10px;border: 2px solid var(--border);color: var(--text);outline: none;padding: 5px;">
+        <option value="zh_CN">简体中文</option>
+        <option value="zh_TW">繁體中文</option>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+      </select>
+    </div>
+  </div>
+
   <div class="page" id="intro">
     <img src="/static/logo.svg" class="logo">
-    <div class="name">Windows 12 <span>online</span></div>
-    <div id="mainbtn" class="btn" onclick="go();window.location.href='https://win12-online.github.io/win12/boot.html';">
+    <div class="name" data-i18n="brand.name">Windows 12 <span>online</span></div>
+    <div id="mainbtn" class="btn" onclick="go();window.location.href='https://win12-online.github.io/win12/boot.html';" data-i18n="btn.experience">
       立即体验 <icon>&#xE72A;</icon>
     </div>
   </div>
@@ -58,33 +75,32 @@
       <div class="item">
         <img src="/static/trophy.png">
         <div class="body">
-          <span class="title detail">Github Trending 榜</span>
-          <span class="title">第 3 名</span>
-          <p>本项目在 Github Trending 榜上最高排名第 3 名，中文榜最高排名第 1 名！</p>
+          <span class="title detail" data-i18n="ach.trending.title">Github Trending 榜</span>
+          <span class="title" data-i18n="ach.trending.rank">第 3 名</span>
+          <p data-i18n="ach.trending.desc">本项目在 Github Trending 榜上最高排名第 3 名，中文榜最高排名第 1 名！</p>
         </div>
       </div>
       <div class="item">
         <img src="/static/star.png">
         <div class="body">
-          <span class="title detail">Github 开源仓库获得</span>
-          <span class="title">7k+ stars</span>
-          <p>至今，本项目在 Github 上获得了 7000 多个星标！</p>
+          <span class="title detail" data-i18n="ach.stars.title">Github 开源仓库获得</span>
+          <span class="title" data-i18n="ach.stars.count">7k+ stars</span>
+          <p data-i18n="ach.stars.desc">至今，本项目在 Github 上获得了 7000 多个星标！</p>
         </div>
       </div>
       <div class="item">
-
         <img src="/static/love.png">
         <div class="body">
-          <span class="title detail">以及</span>
-          <span class="title">你们的支持</span>
-          <p>我们有 30 多名贡献者，有用户们的提议和大家的厚爱。是你们支持着本项目不断前进！</p>
+          <span class="title detail" data-i18n="ach.love.title1">以及</span>
+          <span class="title" data-i18n="ach.love.title2">你们的支持</span>
+          <p data-i18n="ach.love.desc">我们有 30 多名贡献者，有用户们的提议和大家的厚爱。是你们支持着本项目不断前进！</p>
         </div>
       </div>
     </div>
   </div>
   <div id="members" class="page">
     <div class="core">
-      <span class="title">开发团队</span>
+      <span class="title" data-i18n="members.core">开发团队</span>
       <div class="mbs">
         <div onclick="window.open('https://github.com/tjy-gitnub','_blank')">
           <img src="/static/contributors/1.png">
@@ -113,7 +129,7 @@
       </div>
     </div>
     <div class="contributors">
-      <span class="title">贡献者们</span>
+      <span class="title" data-i18n="members.contributors">贡献者们</span>
       <div class="mbs">
         <div onclick="window.open('https://github.com/HHCL233','_blank')" title="HHCL233"><img src="/static/contributors/6.png"></div>
         <div onclick="window.open('https://github.com/lh11117','_blank')" title="lh11117"><img src="/static/contributors/7.png"></div>
@@ -140,7 +156,7 @@
         <div onclick="window.open('https://github.com/dddddgz','_blank')" title="dddddgz"><img src="/static/contributors/28.png"></div>
         <div onclick="window.open('https://github.com/0xbe37e','_blank')" title="0xbe37e"><img src="/static/contributors/29.png"></div>
         <div onclick="window.open('https://github.com/alaricholt677','_blank')" title="alaricholt677"><img src="/static/contributors/30.png"></div>
-        <a class="more" href="https://github.com/win12-online/win12/graphs/contributors">更多 <icon>&#xE72A;</icon>
+        <a class="more" href="https://github.com/win12-online/win12/graphs/contributors" data-i18n="link.more">更多 <icon>&#xE72A;</icon>
         </a>
       </div>
     </div>
@@ -161,11 +177,11 @@
             </div>
           </div>
           <div class="meta">
-            <span class="name">[开源] <nobr>Windows 12 online</nobr> <nobr>最新</nobr><nobr>宣传片</nobr></span>
+            <span class="name" data-i18n="bili.card.name">[开源] <nobr>Windows 12 online</nobr> <nobr>最新</nobr><nobr>宣传片</nobr></span>
           </div>
         </a>
         <div class="acct">
-          <div class="title">成员账号</div>
+          <div class="title" data-i18n="bili.accounts">成员账号</div>
           <div class="list">
             <a class="item" href="https://space.bilibili.com/2010692096">
               <img src="/static/contributors/1.png">
@@ -192,9 +208,10 @@
         </div>
       </div>
     </div>
+
     <div id="gh">
       <div class="title">
-        <img src="/static/ico-gh.svg" alt="github">
+        <img src="/static/ico-gh.svg" alt="github" class="d-invert">
         <span>Github</span>
       </div>
       <div class="card">
@@ -206,44 +223,119 @@
           </a>
           <a class="item" href="https://github.com/win12-online/win12">
             <span>win12-online/win12</span>
-            <span class="detail">项目主仓库</span>
+            <span class="detail" data-i18n="gh.repo.detail">项目主仓库</span>
           </a>
           <a class="item" href="https://github.com/win12-online/win12-online.github.io">
             <span>win12-online/win12-oline.github.io</span>
-            <span class="detail">项目介绍页（此页）</span>
+            <span class="detail" data-i18n="gh.site.detail">项目介绍页（此页）</span>
           </a>
           <a class="item" href="https://github.com/tjy-gitnub/win12-theme">
             <span>tjy-gitnub/win12-theme</span>
-            <span class="detail">个性化主题仓库</span>
+            <span class="detail" data-i18n="gh.theme.detail">个性化主题仓库</span>
           </a>
         </div>
       </div>
     </div>
-  </div></div>
+  </div>
+
   <div id="footer">
     <div>
-      <a href="https://win12-online.github.io/win12/boot.html" target="_self" onclick="go()">
+      <a href="https://win12-online.github.io/win12/boot.html" target="_self" onclick="go()" data-i18n="footer.experience">
         <icon>&#xE72A;</icon> 立即体验
       </a>
       <a href="https://github.com/win12-online/win12">
-        <img src="/static/ico-gh.svg">
-        win12-online/win12
+        <img src="/static/ico-gh.svg" class="d-invert">
+        <span>win12-online/win12</span>
       </a>
     </div>
   </div>
+  <script src="/static/jq.min.js"></script>
+  <script src="/static/jquery.i18n.properties.js"></script>
   <script src="test/cursor.js"></script>
   <script src="test/module.js"></script>
   <script>
-    const t=document.getElementById('mainbtn');
-    t.addEventListener('mousemove',e=>{
-      t.style.setProperty('--pos',`${e.clientX-t.offsetLeft}px ${e.clientY-t.offsetTop}px`);
-    });
+    // const t=document.getElementById('mainbtn');
+    // t.addEventListener('mousemove',e=>{
+    //   t.style.setProperty('--pos',`${e.clientX-t.offsetLeft}px ${e.clientY-t.offsetTop}px`);
+    // });
+    $cursor.query('#mainbtn').addEffect('hoverGlow',{varName:'--bg',bgColor:'#5ed5fd',glowColor:'#9cf2ff',size:180});
     function go(){
       document.body.style.transition='200ms cubic-bezier(0.55, 0.06, 0.68, 0.19)';
       document.body.style.transform='scale(0.3)';
       document.body.style.opacity=0;
-      document.body.style.backgroundColor='#000';
+      document.body.parentElement.style.backgroundColor='#000';
     }
+
+    const themeKey = 'win12-theme-preference';
+    const themeToggle = document.getElementById('page-settings');
+    const switchTrack = themeToggle.querySelector('.switch-track');
+    const switchHandle = themeToggle.querySelector('.switch-handle');
+
+    const getSystemTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const applyTheme = (theme) => {
+      const actual = theme === 'system' ? getSystemTheme() : theme;
+      document.documentElement.dataset.theme = actual;
+      themeToggle.dataset.value = actual;
+      switchHandle.style.transform = actual === 'dark' ? 'translateX(24px)' : 'translateX(0)';
+    };
+
+    const saveTheme = (theme) => localStorage.setItem(themeKey, theme);
+    applyTheme(localStorage.getItem(themeKey) || 'system');
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (!localStorage.getItem(themeKey)) {
+        applyTheme('system');
+      }
+    });
+
+    let dragState = null;
+    let preventClick = false;
+
+    switchTrack.addEventListener('click', () => {
+      if (preventClick) {
+        preventClick = false;
+        return;
+      }
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      saveTheme(next);
+      applyTheme(next);
+    });
+
+    switchTrack.addEventListener('pointerdown', (event) => {
+      dragState = {
+        startX: event.clientX,
+        originX: switchHandle.getBoundingClientRect().left,
+        moved: false
+      };
+      switchHandle.setPointerCapture(event.pointerId);
+      switchHandle.style.transition = 'none';
+    });
+
+    document.addEventListener('pointermove', (event) => {
+      if (!dragState) return;
+      const trackRect = switchTrack.getBoundingClientRect();
+      const handleRect = switchHandle.getBoundingClientRect();
+      const minX = trackRect.left + 4;
+      const maxX = trackRect.right - handleRect.width - 4;
+      const currentX = Math.min(maxX, Math.max(minX, dragState.originX + event.clientX - dragState.startX));
+      if (Math.abs(event.clientX - dragState.startX) > 4) {
+        dragState.moved = true;
+      }
+      switchHandle.style.transform = `translateX(${currentX - minX}px)`;
+    });
+
+    document.addEventListener('pointerup', (event) => {
+      if (!dragState) return;
+      const trackRect = switchTrack.getBoundingClientRect();
+      const handleRect = switchHandle.getBoundingClientRect();
+      const midpoint = trackRect.left + trackRect.width / 2;
+      const next = handleRect.left + handleRect.width / 2 > midpoint ? 'dark' : 'light';
+      saveTheme(next);
+      applyTheme(next);
+      switchHandle.style.transition = 'transform 180ms ease';
+      preventClick = dragState.moved;
+      dragState = null;
+    });
 
     $cursor.query('#achievements .item,#bili>.card>.main>.img>img').addEffect('tiltRepel',{maxTilt:12,perspective:800});
     $cursor.query('#view>img').addEffect('tiltRepel',{maxTilt:5,perspective:1000});
@@ -256,6 +348,53 @@
         bb.resume();
       }
     });
+
+    // 国际化逻辑
+    (function(){
+      const langKey = 'site-lang';
+      const langSelect = document.getElementById('lang-select');
+      const available = ['zh_CN','zh_TW','en','fr'];
+
+      function mapBrowserLang() {
+        const nl = (navigator.language||navigator.userLanguage||'').toLowerCase();
+        if(nl.startsWith('zh-hant')||nl.startsWith('zh-tw')||nl.startsWith('zh-hk')) return 'zh_TW';
+        if(nl.startsWith('zh')) return 'zh_CN';
+        if(nl.startsWith('fr')) return 'fr';
+        return 'en';
+      }
+
+      function loadProps(lang){
+        const filename = available.includes(lang) ? lang : 'en';
+        $.i18n.properties({
+          name: filename,
+          path: '/locales/',
+          mode: 'map',
+          callback: function() {
+            document.querySelectorAll('[data-i18n]').forEach(el=>{
+              const key = el.getAttribute('data-i18n');
+              const val = $.i18n.prop(key);
+              if(val !== undefined) el.innerHTML = val;
+            });
+            // 页面 title
+            const t = document.querySelector('title[data-i18n]');
+            if(t){
+              const v = $.i18n.prop('page.title');
+              if(v) document.title = v;
+            }
+          }
+        });
+      }
+
+      const saved = localStorage.getItem(langKey) || mapBrowserLang();
+      if(langSelect) langSelect.value = saved;
+      loadProps(saved);
+
+      langSelect && langSelect.addEventListener('change', function(){
+        const v = this.value;
+        localStorage.setItem(langKey,v);
+        loadProps(v);
+      });
+    })();
   </script>
 </body>
 
