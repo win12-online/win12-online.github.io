@@ -826,12 +826,32 @@ body>* {
 }
 
 
-#bili>.card>.acct>.list {
+/* #bili>.card>.acct>.list {
     flex-direction: row;
 
     >.item {
         flex-direction: column;
         text-align: center;
+    }
+} */
+#bili>.card>.acct>.list {
+    flex-direction: column;
+
+    >.item {
+        flex-direction: row;
+        text-align: start;
+    }
+}
+
+@media (min-width: 500px){
+
+    #bili>.card>.acct>.list {
+        flex-direction: row;
+
+        >.item {
+            flex-direction: column;
+            text-align: center;
+        }
     }
 }
 
@@ -858,8 +878,6 @@ body>* {
     }
 }
 
-
-@media (min-width: 800px) {}
 
 @media (min-width: 810px) {
 
@@ -953,10 +971,9 @@ body>* {
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    cursor: pointer;
     user-select: none;
     padding: 8px;
-    padding-right: 15px;
+    padding-right: 13px;
     border-radius: 999px;
     background: var(--surface);
     border: 2px solid var(--border);
