@@ -307,7 +307,7 @@ body>* {
     transform: scale(0.93);
     height: 70px;
     margin-top: 50px;
-    margin-bottom: 8vh;
+    margin-bottom: 0;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
     gap: 10px;
     /* background: var(--bg); */
