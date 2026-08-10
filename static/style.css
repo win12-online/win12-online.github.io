@@ -209,6 +209,21 @@ body>* {
     line-height: 1.2;
 }
 
+#intro>.desktop-link {
+    margin-top: 8px;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.75;
+    transition: opacity 100ms;
+}
+
+#intro>.desktop-link:hover {
+    opacity: 1;
+}
+
 #intro {
     display: flex;
     position: sticky;
