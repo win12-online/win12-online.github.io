@@ -112,7 +112,7 @@ document.body.addEventListener('scroll', (e) => {
         const filename = available.includes(lang) ? lang : 'en';
         $.i18n.properties({
             name: filename,
-            path: '/locales/',
+            path: '/homepage-assets/locales/',
             mode: 'map',
             callback: function () {
                 document.querySelectorAll('[data-i18n]').forEach(el => {
