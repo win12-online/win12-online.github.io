@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+  workflow_call:
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/setup@v1
+        with:
+          version: ^11.21.0
+          runtime: node@26
+          cache: true
+          install: false
+      - name: Install dependencies
+        run: pnpm ci
+      - name: Build
+        run: pnpm build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./dist
+          retention-days: 7
