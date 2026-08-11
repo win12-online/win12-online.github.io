@@ -1,17 +1,17 @@
 {
-	"type": "module",
-	"scripts": {
-		"build": "tsx build.ts",
-		"preview": "live-server ./dist"
-	},
-	"dependencies": {
-		"art-template": "^4.13.4",
-		"octokit": "^5.0.5"
-	},
-	"devDependencies": {
-		"@types/node": "^26.2.0",
-		"live-server": "^1.2.2",
-		"tsx": "^4.23.11",
-		"typescript": "^7.0.2"
-	}
+  "type": "module",
+  "scripts": {
+    "build": "tsx build.ts",
+    "preview": "live-server ./dist"
+  },
+  "dependencies": {
+    "art-template": "^4.13.4",
+    "octokit": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "live-server": "^1.2.2",
+    "tsx": "^4.23.11",
+    "typescript": "^7.0.2"
+  }
 }
