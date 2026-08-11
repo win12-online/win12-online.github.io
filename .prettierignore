@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+node_modules/
+dist/
+.vscode/
+jq.min.js
+jquery.i18n.properties.js
