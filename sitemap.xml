@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://win12-online.github.io/</loc>
-    <lastmod>2026-11-3</lastmod> <!-- This is just an example placeholder - this will be updated automatically via .github/workflows/sitemap.yml -->
-  </url>
+<url>
+<loc>https://win12-online.github.io/</loc>
+<lastmod>2026-09-05</lastmod>
+</url>
+<url>
+<loc>https://win12-online.github.io/homepage-assets/test/</loc>
+<lastmod>2026-08-12</lastmod>
+</url>
+<url>
+<loc>https://win12-online.github.io/homepage-assets/test/gravity.html</loc>
+<lastmod>2026-08-12</lastmod>
+</url>
 </urlset>
